@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Byte's Computer Lab — KG ICT Adventure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ======================= TOP NAV ======================= -->
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-slot" id="schoolLogo" aria-label="School Logo">School Logo</div>
+    <span class="brand-name">Byte's Computer Lab</span>
+  </div>
+  <nav class="topnav" aria-label="Main navigation">
+    <button class="nav-btn" data-screen="home"><span class="ic">🏠</span>Home</button>
+    <button class="nav-btn" data-screen="lessons"><span class="ic">📘</span>Lessons</button>
+    <button class="nav-btn" data-screen="games"><span class="ic">🎮</span>Games</button>
+    <button class="nav-btn" data-screen="progress"><span class="ic">⭐</span>Progress</button>
+    <button class="nav-btn" data-screen="certificate"><span class="ic">🏆</span>Certificate</button>
+    <button class="nav-btn" data-screen="settings"><span class="ic">⚙️</span>Settings</button>
+  </nav>
+  <button id="musicToggle" class="icon-toggle" title="Music On/Off" aria-label="Toggle music">🔊</button>
+</header>
+
+<main id="app">
+
+  <!-- ======================= HOME ======================= -->
+  <section class="screen active" id="screen-home">
+    <div class="hero-circuit">
+      <svg class="circuit-bg" viewBox="0 0 1000 260" preserveAspectRatio="none" aria-hidden="true">
+        <path id="circuitPath" d="M10,200 C150,40 280,260 420,120 C560,-10 680,230 820,90 C900,15 950,60 990,30" />
+      </svg>
+      <div class="hero-text">
+        <h1>Hi, I'm Byte! <span class="wave">👋</span></h1>
+        <p>Let's explore the Computer Lab together!</p>
+        <button class="btn-primary big" id="startJourneyBtn">Start My Journey 🚀</button>
+      </div>
+      <div class="mascot-stage" id="homeMascotStage"></div>
+    </div>
+
+    <h2 class="section-title">My Learning Path</h2>
+    <div class="path-track" id="pathTrack"><!-- lesson nodes injected --></div>
+  </section>
+
+  <!-- ======================= LESSONS LIST ======================= -->
+  <section class="screen" id="screen-lessons">
+    <h2 class="section-title">📘 All Lessons</h2>
+    <div class="card-grid" id="lessonGrid"></div>
+  </section>
+
+  <!-- ======================= LESSON DETAIL ======================= -->
+  <section class="screen" id="screen-lesson-detail">
+    <button class="btn-back" data-back="lessons">← Back to Lessons</button>
+    <div id="lessonDetailContent"></div>
+  </section>
+
+  <!-- ======================= GAMES HUB ======================= -->
+  <section class="screen" id="screen-games">
+    <h2 class="section-title">🎮 Fun Activities</h2>
+    <div class="card-grid" id="gameGrid"></div>
+  </section>
+
+  <!-- ======================= GAME DETAIL ======================= -->
+  <section class="screen" id="screen-game-detail">
+    <button class="btn-back" data-back="games">← Back to Games</button>
+    <div id="gameDetailContent"></div>
+  </section>
+
+  <!-- ======================= PROGRESS ======================= -->
+  <section class="screen" id="screen-progress">
+    <h2 class="section-title">⭐ My Progress</h2>
+    <div class="progress-summary">
+      <div class="stat-card"><div class="stat-num" id="statStars">0</div><div class="stat-label">Stars</div></div>
+      <div class="stat-card"><div class="stat-num" id="statCoins">0</div><div class="stat-label">Coins</div></div>
+      <div class="stat-card"><div class="stat-num" id="statLessons">0/8</div><div class="stat-label">Lessons Done</div></div>
+      <div class="stat-card"><div class="stat-num" id="statGames">0/8</div><div class="stat-label">Games Done</div></div>
+    </div>
+    <div class="big-progress-bar"><div class="big-progress-fill" id="bigProgressFill"></div></div>
+    <h3 class="sub-title">🎖️ My Badges</h3>
+    <div class="badge-row" id="badgeRow"></div>
+    <button class="btn-secondary" id="resetProgressBtn">Reset My Progress</button>
+  </section>
+
+  <!-- ======================= CERTIFICATE ======================= -->
+  <section class="screen" id="screen-certificate">
+    <h2 class="section-title">🏆 My Certificate</h2>
+    <div id="certLockedMsg" class="locked-msg">Finish all 8 lessons to unlock your certificate! Keep going, you're doing great! 🌟</div>
+    <div id="certArea" class="cert-area" style="display:none">
+      <div class="name-input-row">
+        <label for="studentNameInput">Type your name:</label>
+        <input type="text" id="studentNameInput" maxlength="30" placeholder="Your Name">
+      </div>
+      <div class="certificate" id="certificatePrintArea">
+        <div class="cert-border">
+          <div class="cert-logo-slot">School Logo</div>
+          <p class="cert-kicker">Certificate of Achievement</p>
+          <h2 class="cert-course">Byte's Computer Lab — KG ICT Adventure</h2>
+          <p class="cert-presented">This certificate is proudly presented to</p>
+          <h1 class="cert-name" id="certNameDisplay">_____________</h1>
+          <p class="cert-message">for completing all Computer Lab lessons with curiosity and courage!</p>
+          <div class="cert-bottom-row">
+            <div class="cert-date">Date: <span id="certDate"></span></div>
+            <div class="cert-mascot-sign">— Byte 🤖</div>
+          </div>
+        </div>
+      </div>
+      <div class="cert-actions">
+        <button class="btn-primary" id="printCertBtn">🖨️ Print Certificate</button>
+        <button class="btn-secondary" id="pdfCertBtn">⬇️ Save as PDF</button>
+      </div>
+      <p class="hint-text">Tip: "Save as PDF" opens the print window — choose "Save as PDF" as the printer/destination.</p>
+    </div>
+  </section>
+
+  <!-- ======================= SETTINGS ======================= -->
+  <section class="screen" id="screen-settings">
+    <h2 class="section-title">⚙️ Settings</h2>
+    <div class="settings-list">
+      <div class="settings-row">
+        <span>🔊 Background Music</span>
+        <label class="switch"><input type="checkbox" id="settingMusic" checked><span class="slider"></span></label>
+      </div>
+      <div class="settings-row">
+        <span>🗣️ Voice / Word Pronunciation</span>
+        <label class="switch"><input type="checkbox" id="settingVoice" checked><span class="slider"></span></label>
+      </div>
+      <div class="settings-row">
+        <span>🔔 Sound Effects</span>
+        <label class="switch"><input type="checkbox" id="settingSfx" checked><span class="slider"></span></label>
+      </div>
+      <div class="settings-row">
+        <span>🐢 Calmer Animations (reduce motion)</span>
+        <label class="switch"><input type="checkbox" id="settingReducedMotion"><span class="slider"></span></label>
+      </div>
+    </div>
+    <button class="btn-secondary" id="resetProgressBtn2">Reset My Progress</button>
+  </section>
+
+</main>
+
+<!-- ======================= MASCOT WIDGET (floating) ======================= -->
+<button id="mascotWidget" class="mascot-widget" aria-label="Talk to Byte"></button>
+<div id="mascotBubble" class="mascot-bubble" role="status" aria-live="polite"></div>
+
+<!-- ======================= CONFETTI CANVAS ======================= -->
+<canvas id="confettiCanvas"></canvas>
+
+<script src="script.js"></script>
+</body>
+</html>
